@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaneesh Kad - Data Scientist</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CSS is kept for general page icons, but not for 3D sprites -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Configure Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'golden': '#FFD700', 
+                        'silver': '#C0C0C0', 
+                        
+                        'dark-bg': '#0A0A0A', 
+                        'dark-card': '#18181B', 
+                        
+                        'light-bg': '#F9FAFB', 
+                        'light-card': '#FFFFFF', 
+                        'dark-text': '#1F2937', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for smooth scrolling and shadows */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Gradient for the CTA button */
+        .cta-gradient {
+            background-image: linear-gradient(to right, #FFD700, #C0C0C0);
+            color: #0A0A0A; 
+        }
+        .cta-gradient:hover {
+            background-image: linear-gradient(to right, #C0C0C0, #FFD700);
+            box-shadow: 0 10px 15px -3px rgba(255, 215, 0, 0.5), 0 4px 6px -2px rgba(255, 215, 0, 0.25);
+        }
+        /* Style for the 3D container (Maintained large size) */
+        #brain-3d-container {
+            position: relative;
+            width: 90%; 
+            max-width: 900px; 
+            height: 650px; 
+            margin: 0 auto;
+            border-radius: 1rem; 
+            overflow: hidden;
+            background-color: transparent; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* CRITICAL FIX: Ensure the canvas fills 100% of the container and has a z-index */
+        #brain-3d-container canvas {
+            display: block; 
+            width: 100%; 
+            height: 100%;
+            position: absolute; 
+            top: 0;
+            left: 0;
+            z-index: 1; 
+        }
+        /* Initial positioning for the 3D model hint */
+        #brain-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFD700;
+            font-size: 1.5rem; 
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.7);
+            border-radius: 0.75rem;
+            z-index: 10; 
+            pointer-events: none; 
+        }
+        /* Adjustments for a wider, more spacious main container */
+        .main-content {
+            max-width: 80rem; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="bg-light-bg dark:bg-dark-bg font-sans text-dark-text dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-sm shadow-xl dark:shadow-gray-900/50 border-b border-gray-200 dark:border-gray-700/50">
+        <div class="main-content px-4 sm:px-8 lg:px-12 py-6 flex justify-between items-center">
+            <a href="#hero" class="text-3xl font-bold text-golden hover:text-silver transition duration-150">Avaneesh Kad</a>
+            <nav class="hidden md:flex space-x-10 items-center">
+                <a href="#about" class="text-xl hover:text-golden transition duration-150 font-medium">About</a>
+                <a href="#publications" class="text-xl hover:text-golden transition duration-150 font-medium">Publications</a>
+                <a href="#skills" class="text-xl hover:text-golden transition duration-150 font-medium">Expertise</a>
+                <a href="#portfolio" class="text-xl hover:text-golden transition duration-150 font-medium">Projects</a>
+                <a href="#contact" class="text-xl hover:text-golden transition duration-150 font-medium">Contact</a>
+                <button id="theme-toggle" class="p-3 rounded-full text-dark-text dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-card transition duration-150" aria-label="Toggle theme">
+                    <!-- Icon placeholder, updated by JS -->
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </nav>
+            <!-- Mobile Menu Button and Toggle -->
+            <div class="flex items-center md:hidden space-x-2">
+                <button id="mobile-theme-toggle" class="p-3 rounded-full text-dark-text dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-card transition duration-150" aria-label="Toggle theme">
+                    <svg id="mobile-theme-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="p-3 rounded-lg text-dark-text dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-card transition duration-150" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden pb-6 border-t border-gray-200 dark:border-gray-700/50">
+            <nav class="flex flex-col space-y-3 px-6">
+                <a href="#about" class="py-3 text-xl hover:text-golden transition duration-150">About</a>
+                <a href="#publications" class="py-3 text-xl hover:text-golden transition duration-150">Publications</a>
+                <a href="#skills" class="py-3 text-xl hover:text-golden transition duration-150">Expertise</a>
+                <a href="#portfolio" class="py-3 text-xl hover:text-golden transition duration-150">Projects</a>
+                <a href="#contact" class="py-3 text-xl hover:text-golden transition duration-150">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="py-20 md:py-40 px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center justify-center min-h-screen-75 bg-light-card/50 dark:bg-dark-card/30">
+            <div class="max-w-4xl mb-12">
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-tight tracking-tight mb-6">
+                    Hello, I'm <span class="text-golden">Avaneesh Kad</span>
+                </h1>
+                <p class="text-2xl md:text-3xl text-gray-600 dark:text-silver mb-12">
+                    A passionate <span class="text-golden font-bold">Data Scientist</span>, building intelligent systems and uncovering deep insights with AI.
+                </p>
+            </div>
+
+            <!-- 3D Brain Container (Large Size Maintained) -->
+            <div id="brain-3d-container" class="w-full max-w-4xl rounded-xl shadow-2xl relative">
+                <div id="brain-hint" class="dark:text-golden text-light-bg">
+                    3D Data Network: Drag to Rotate. Click on an app icon to connect!
+                </div>
+                <!-- Three.js Canvas will be appended here -->
+            </div>
+            
+            <a href="#portfolio" class="mt-12 inline-block px-12 py-5 text-xl font-bold rounded-full shadow-xl cta-gradient transition duration-300 transform hover:scale-105">
+                Explore My Insights &rarr;
+            </a>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 bg-light-card dark:bg-dark-card rounded-xl shadow-2xl my-20 mx-4 border-l-8 border-golden">
+            <h2 class="text-5xl font-bold text-center mb-16 text-golden pb-4 inline-block mx-auto border-b-4 border-silver/50">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-xl text-gray-600 dark:text-gray-300">
+                    <p>I thrive at the intersection of large-scale data and statistical rigor. For the past 5 years, I've been transforming complex, raw data into actionable models that drive strategy and innovation.</p>
+                    <p>My expertise covers the entire lifecycle, from designing efficient **Data Engineering** pipelines to deploying production-grade **Machine Learning** and **Deep Learning** models. I believe in the power of Python and scalable cloud solutions (AWS/GCP) to handle terabytes of information.</p>
+                    <p class="mt-6">Outside of coding, I enjoy exploring advanced visualization techniques and contributing to open-source statistical packages.</p>
+                    <a href="#contact" class="mt-8 inline-block text-golden text-xl font-semibold hover:underline">Let's Collaborate &rarr;</a>
+                </div>
+                <!-- Placeholder for a personal image -->
+                <div class="rounded-xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-dark-bg p-10 text-center border-4 border-gray-300 dark:border-gray-800">
+                    <img src="https://placehold.co/400x400/FFD700/0A0A0A?text=Avaneesh+Kad+Data+Scientist" alt="Placeholder for professional headshot" class="w-full h-auto rounded-xl object-cover border-8 border-golden/50">
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 bg-light-bg dark:bg-dark-bg">
+            <h2 class="text-5xl font-bold text-center mb-16 text-dark-text dark:text-silver pb-4 inline-block mx-auto border-b-4 border-golden/50">Academic Publications</h2>
+            
+            <div class="max-w-5xl mx-auto space-y-8">
+                <!-- Publication 1 -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl border-l-8 border-silver hover:border-golden transition duration-300">
+                    <p class="text-2xl font-semibold text-dark-text dark:text-golden mb-2">
+                        "Optimizing Latent Space Embeddings for Zero-Shot Learning in Medical Imaging"
+                    </p>
+                    <p class="text-lg text-gray-500 dark:text-gray-400 mb-3">
+                        <span class="font-bold">Avaneesh Kad</span>, B. Chen, L. Garcia. <span class="italic">Journal of Advanced Machine Intelligence, Vol 15, Issue 2.</span> (2024)
+                    </p>
+                    <a href="#" class="text-lg text-golden hover:underline font-medium">Read Full Paper (DOI Link Placeholder) &rarr;</a>
+                </div>
+
+                <!-- Publication 2 -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl border-l-8 border-silver hover:border-golden transition duration-300">
+                    <p class="text-2xl font-semibold text-dark-text dark:text-golden mb-2">
+                        "A Scalable Streaming Architecture for Real-time Sensor Data Analysis using Apache Kafka"
+                    </p>
+                    <p class="text-lg text-gray-500 dark:text-gray-400 mb-3">
+                        L. Diaz, <span class="font-bold">Avaneesh Kad</span>. <span class="italic">IEEE Transactions on Data Engineering.</span> (2023)
+                    </p>
+                    <a href="#" class="text-lg text-golden hover:underline font-medium">View Conference Presentation &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 bg-light-bg dark:bg-dark-bg">
+            <h2 class="text-5xl font-bold text-center mb-16 text-dark-text dark:text-silver pb-4 inline-block mx-auto border-b-4 border-golden/50">Core Expertise</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+                <!-- Skill Card 1: AI & ML -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 border-2 border-gray-200 dark:border-silver/30 hover:border-golden">
+                    <span class="text-5xl mb-3 block" role="img" aria-label="Brain">🧠</span>
+                    <h3 class="text-xl font-semibold text-golden">AI & ML</h3>
+                </div>
+                <!-- Skill Card 2: Data Science -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 border-2 border-gray-200 dark:border-silver/30 hover:border-golden">
+                    <span class="text-5xl mb-3 block" role="img" aria-label="Bar Chart">📊</span>
+                    <h3 class="text-xl font-semibold text-golden">Data Science</h3>
+                </div>
+                <!-- Skill Card 3: Data Engineering -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 border-2 border-gray-200 dark:border-silver/30 hover:border-golden">
+                    <span class="text-5xl mb-3 block" role="img" aria-label="Construction Crane">🏗️</span>
+                    <h3 class="text-xl font-semibold text-golden">Data Engineering</h3>
+                </div>
+                <!-- Skill Card 4: Deep Learning -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 border-2 border-gray-200 dark:border-silver/30 hover:border-golden">
+                    <span class="text-5xl mb-3 block" role="img" aria-label="Rocket">🚀</span>
+                    <h3 class="text-xl font-semibold text-golden">Deep Learning (DL)</h3>
+                </div>
+                <!-- Skill Card 5: Python -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 border-2 border-gray-200 dark:border-silver/30 hover:border-golden">
+                    <span class="text-5xl mb-3 block" role="img" aria-label="Python Snake">🐍</span>
+                    <h3 class="text-xl font-semibold text-golden">Python Ecosystem</h3>
+                </div>
+                <!-- Skill Card 6: Cloud Platforms -->
+                <div class="p-8 bg-light-card dark:bg-dark-card rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 border-2 border-gray-200 dark:border-silver/30 hover:border-golden">
+                    <span class="text-5xl mb-3 block" role="img" aria-label="Cloud">☁️</span>
+                    <h3 class="text-xl font-semibold text-golden">Cloud Platforms</h3>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 bg-light-card dark:bg-dark-card rounded-xl my-20 mx-4 shadow-2xl">
+            <h2 class="text-5xl font-bold text-center mb-16 text-golden pb-4 inline-block mx-auto border-b-4 border-silver/50">Featured Data Projects</h2>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Project Card 1 (ML) -->
+                <div class="bg-light-bg dark:bg-dark-bg rounded-xl shadow-xl overflow-hidden group border-2 border-gray-300 dark:border-gray-700 hover:border-golden transition duration-300">
+                    <img src="https://placehold.co/800x500/FFD700/0A0A0A?text=Predictive+Model" alt="Financial Forecasting Model Project" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold text-golden mb-3">Financial Forecasting Model</h3>
+                        <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Developed a robust time-series model using **Deep Learning** (LSTM) to predict quarterly financial volatility with 92% accuracy.</p>
+                        <a href="#" class="text-xl text-gray-600 dark:text-silver hover:text-golden hover:underline font-medium">View Model Documentation &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 (Data Engineering) -->
+                <div class="bg-light-bg dark:bg-dark-bg rounded-xl shadow-xl overflow-hidden group border-2 border-gray-300 dark:border-gray-700 hover:border-golden transition duration-300">
+                    <img src="https://placehold.co/800x500/C0C0C0/0A0A0A?text=ETL+Pipeline" alt="Real-time ETL Pipeline Project" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold text-golden mb-3">Scalable ETL Pipeline</h3>
+                        <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Engineered a real-time data processing pipeline on **Cloud Platforms** (GCP/AWS) to ingest and clean 1TB of streaming event data daily.</p>
+                        <a href="#" class="text-xl text-gray-600 dark:text-silver hover:text-golden hover:underline font-medium">View Deployment Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 text-center">
+            <h2 class="text-5xl font-bold text-center mb-8 text-dark-text dark:text-silver pb-4 inline-block mx-auto border-b-4 border-golden/50">Get In Touch</h2>
+            <p class="text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-16">
+                I'm currently seeking challenging Data Science roles and consulting opportunities. Let's discuss your next massive data problem.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8">
+                <a href="mailto:avaneesh.kad@example.com" class="inline-block px-10 py-5 bg-golden text-dark-bg text-xl font-semibold rounded-full shadow-lg hover:bg-silver transition duration-300 transform hover:scale-105">
+                    Email Me
+                </a>
+                <a href="https://linkedin.com/in/avaneesh-kad-75433b36a" target="_blank" class="inline-block px-10 py-5 bg-light-card dark:bg-dark-card border-2 border-golden text-golden text-xl font-semibold rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light-card dark:bg-dark-card text-gray-500 py-10 mt-20 border-t border-gray-200 dark:border-gray-700/50">
+        <div class="main-content px-4 sm:px-8 lg:px-12 text-center">
+            <p class="text-lg">&copy; 2025 Avaneesh Kad. Built with <span class="text-golden">Data</span> and <span class="text-silver">Style</span>.</p>
+            <div class="flex justify-center space-x-8 mt-6 text-lg">
+                <a href="#about" class="hover:text-golden transition duration-150">About</a>
+                <a href="#publications" class="hover:text-golden transition duration-150">Publications</a>
+                <a href="#skills" class="hover:text-golden transition duration-150">Expertise</a>
+                <a href="#contact" class="hover:text-golden transition duration-150">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Three.js Library Imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Theme Switcher Logic (Retained) ---
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+        const sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        const moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+        function setIcon(isDark) {
+            const icon = isDark ? sunIcon : moonIcon;
+            if (themeIcon) themeIcon.innerHTML = icon;
+            if (mobileThemeIcon) mobileThemeIcon.innerHTML = icon;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                setIcon(true);
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                setIcon(false);
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        }
+
+        window.onload = function() {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            // Start 3D after theme is applied
+            init3D();
+        }
+
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+
+
+        // --- Three.js Brain Model Integration (UPDATED FOR SVGS) ---
+        let scene, camera, renderer, brainModel, controls, neuronParticles;
+        const brainContainer = document.getElementById('brain-3d-container');
+        const brainHint = document.getElementById('brain-hint');
+        
+        const brainRadius = 3.0; 
+        const hotspotDistance = brainRadius * 1.3; 
+        
+        // --- UPDATED: Social Links with Professional SVG Icons and Brand Colors ---
+        const socialLinks = {
+            'github': { 
+                position: { x: 0.7, y: 0.2, z: -0.2 }, 
+                url: 'https://github.com/FlickM10', 
+                label: 'GitHub',
+                svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>`,
+                color: '#ffffff',
+                bgColor: '#1f1f1f'
+            },
+            'linkedin': { 
+                position: { x: -0.5, y: 0.5, z: 0.1 }, 
+                url: 'https://www.linkedin.com/in/avaneesh-kad-75433b36a', 
+                label: 'LinkedIn',
+                svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.438-.103.249-.129.597-.129.946v5.421h-3.554s.047-8.789 0-9.701h3.554v1.373c.429-.662 1.196-1.603 2.906-1.603 2.121 0 3.71 1.388 3.71 4.372v5.559zM5.337 8.855c-1.144 0-1.915-.759-1.915-1.71 0-.956.77-1.71 1.957-1.71 1.187 0 1.915.754 1.948 1.71 0 .951-.761 1.71-1.99 1.71zm1.582 11.597H3.635V9.751h3.284v10.701zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                </svg>`,
+                color: '#ffffff',
+                bgColor: '#0a66c2'
+            },
+            'youtube': { 
+                position: { x: 0.2, y: -0.65, z: 0.1 }, 
+                url: 'https://youtube.com/@avaneeshkad4?si=J_hv9ZbTCjzK6wnG', 
+                label: 'YouTube',
+                svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>`,
+                color: '#ffffff',
+                bgColor: '#ff0000'
+            },
+            'devpost': { 
+                position: { x: -0.65, y: -0.2, z: 0.15 }, 
+                url: 'https://devpost.com/FlickM10?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav', 
+                label: 'Devpost',
+                svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 6h3v6h-3V6zm0 7h3v5H7v-5zm5-7h3v11h-3V6z" fill="currentColor"/>
+                </svg>`,
+                color: '#ffffff',
+                bgColor: '#003366'
+            },
+            'discord': { 
+                position: { x: 0.5, y: -0.4, z: -0.3 }, 
+                url: 'https://discord.com/users/avaneesh_disco_05481', 
+                label: 'Discord',
+                svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.607 1.25a18.27 18.27 0 0 0-5.487 0c-.163-.386-.395-.875-.607-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.042-.106 13.107 13.107 0 0 1-1.873-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.294.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.294a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.076.076 0 0 0-.041.107c.352.699.764 1.364 1.225 1.994a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-4.786-.838-8.95-3.549-12.617a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-.965-2.157-2.156 0-1.193.975-2.157 2.157-2.157 1.191 0 2.169.964 2.157 2.157 0 1.19-.966 2.156-2.157 2.156zm7.975 0c-1.183 0-2.157-.965-2.157-2.156 0-1.193.975-2.157 2.157-2.157 1.191 0 2.169.964 2.157 2.157 0 1.19-.966 2.156-2.157 2.156z"/>
+                </svg>`,
+                color: '#ffffff',
+                bgColor: '#5865f2'
+            },
+            'email': { 
+                position: { x: -0.3, y: 0.55, z: -0.25 }, 
+                url: 'mailto:avaneeshkad@gmail.com', 
+                label: 'Email',
+                svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>`,
+                color: '#ffffff',
+                bgColor: '#c41e3a'
+            }
+        };
+
+        // Utility to create a modern hotspot sprite with proper alignment and labels
+        function createHotspotSprite(svgPath, fgColor, bgColor, label, size = 256) {
+            const canvas = document.createElement('canvas');
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = size * dpr;
+            canvas.height = (size + 64) * dpr; // Extra space for label
+            canvas.style.width = size + 'px';
+            canvas.style.height = (size + 64) + 'px';
+            
+            const context = canvas.getContext('2d');
+            context.scale(dpr, dpr);
+            
+            // Clear canvas
+            context.clearRect(0, 0, size, size + 64);
+
+            // 1. Draw solid background circle with brand color (anti-aliased)
+            context.fillStyle = bgColor;
+            context.beginPath();
+            context.arc(size / 2, size / 2, size / 2 - 6, 0, Math.PI * 2);
+            context.fill();
+
+            // 2. Add a golden border ring with smooth edges
+            context.strokeStyle = '#FFD700';
+            context.lineWidth = 3;
+            context.lineCap = 'round';
+            context.lineJoin = 'round';
+            context.beginPath();
+            context.arc(size / 2, size / 2, size / 2 - 6, 0, Math.PI * 2);
+            context.stroke();
+
+            // 3. Create high-quality SVG
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="${size * 0.55}" height="${size * 0.55}">
+                <g fill="${fgColor}">
+                    ${svgPath}
+                </g>
+            </svg>`;
+            
+            const img = new Image();
+            img.setAttribute('crossOrigin', 'anonymous');
+            const svgDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.magFilter = THREE.LinearFilter;
+            texture.minFilter = THREE.LinearMipMapLinearFilter;
+            
+            const material = new THREE.SpriteMaterial({ 
+                map: texture, 
+                transparent: true, 
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true,
+                fog: false
+            });
+            const sprite = new THREE.Sprite(material);
+            sprite.scale.set(1.5, 1.85, 1); 
+
+            img.onload = function() {
+                // Draw SVG icon centered on canvas (in the circle area)
+                const iconSize = size * 0.55;
+                const offsetX = (size - iconSize) / 2;
+                const offsetY = (size - iconSize) / 2;
+                context.drawImage(img, offsetX, offsetY, iconSize, iconSize);
+                
+                // 4. Add label text below the circle with better styling
+                context.fillStyle = '#FFD700';
+                context.font = `bold 12px "Inter", -apple-system, BlinkMacSystemFont, sans-serif`;
+                context.textAlign = 'center';
+                context.textBaseline = 'top';
+                context.fillText(label, size / 2, size + 12);
+                
+                texture.needsUpdate = true;
+            };
+            
+            img.onerror = function() {
+                // Fallback: draw circle and text label
+                context.fillStyle = fgColor;
+                context.font = `bold ${size/4.5}px "Inter", sans-serif`;
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                context.fillText(label.charAt(0).toUpperCase(), size / 2, size / 2);
+                texture.needsUpdate = true;
+            };
+            
+            img.src = svgDataUrl;
+            
+            return sprite;
+        }
+
+
+        function init3D() {
+            // 1. Setup Scene
+            const containerWidth = brainContainer.clientWidth;
+            const containerHeight = brainContainer.clientHeight;
+
+            scene = new THREE.Scene();
+            scene.background = null; 
+
+            // 2. Setup Camera 
+            camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+            camera.position.z = 6; 
+
+            // 3. Setup Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); 
+            renderer.setSize(containerWidth, containerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            brainContainer.appendChild(renderer.domElement);
+            
+            if (brainHint) brainHint.style.display = 'none';
+
+            // 4. Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 10, 7.5);
+            scene.add(directionalLight);
+
+            // 5. Controls
+            const ControlsClass = THREE.OrbitControls || window.OrbitControls;
+
+            if (ControlsClass) {
+                controls = new ControlsClass(camera, renderer.domElement);
+                controls.enableDamping = true; 
+                controls.dampingFactor = 0.05;
+                controls.minDistance = 3;
+                controls.maxDistance = 15;
+                controls.enablePan = false; 
+                controls.target.set(0, 0, 0);
+            } else {
+                console.error("OrbitControls failed to load.");
+                controls = null;
+            }
+
+            // 6. Conceptual Brain Model (Neuro-style Dodecahedron)
+            const geometry = new THREE.DodecahedronGeometry(brainRadius, 1); 
+            const material = new THREE.MeshPhongMaterial({ 
+                color: 0xffd700, 
+                shininess: 50,
+                wireframe: true,
+                opacity: 0.2, 
+                transparent: true,
+                depthTest: false 
+            });
+            brainModel = new THREE.Mesh(geometry, material);
+            scene.add(brainModel);
+
+            // 6.1 Neuron Detail (Particle System)
+            const particleCount = 5000;
+            const positions = new Float32Array(particleCount * 3);
+            const pMaterial = new THREE.PointsMaterial({
+                color: 0xFFD700, 
+                size: 0.015,
+                blending: THREE.AdditiveBlending, 
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true 
+            });
+
+            // Populate particle positions randomly within a sphere
+            for (let i = 0; i < particleCount; i++) {
+                const x = THREE.MathUtils.randFloatSpread(brainRadius * 2);
+                const y = THREE.MathUtils.randFloatSpread(brainRadius * 2);
+                const z = THREE.MathUtils.randFloatSpread(brainRadius * 2);
+
+                if (x*x + y*y + z*z < brainRadius * brainRadius * 1.5) {
+                    positions[i * 3] = x;
+                    positions[i * 3 + 1] = y;
+                    positions[i * 3 + 2] = z;
+                } else {
+                    positions[i * 3] = 1000; 
+                }
+            }
+            const pGeometry = new THREE.BufferGeometry();
+            pGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            neuronParticles = new THREE.Points(pGeometry, pMaterial);
+            scene.add(neuronParticles);
+
+
+            // 7. Add Hotspot Icons (Sprites)
+            const hotspotMeshes = [];
+            Object.keys(socialLinks).forEach(key => {
+                const link = socialLinks[key];
+                
+                // Create the visible icon Sprite with high-quality SVG and brand colors
+                const hotspotIcon = createHotspotSprite(
+                    link.svg, 
+                    link.color, 
+                    link.bgColor, 
+                    link.label
+                ); 
+                
+                // Position the sprite outside the brain (improved distribution)
+                hotspotIcon.position.set(
+                    link.position.x * hotspotDistance, 
+                    link.position.y * hotspotDistance, 
+                    link.position.z * hotspotDistance
+                ); 
+                
+                // Attach user data for interaction
+                hotspotIcon.userData.url = link.url.startsWith('www') ? `https://${link.url}` : link.url;
+                hotspotIcon.userData.label = key; 
+                hotspotIcon.userData.originalScale = 1.5;
+                
+                scene.add(hotspotIcon); 
+                hotspotMeshes.push(hotspotIcon); 
+            });
+            
+            // 8. Raycasting for Interaction (Clicking the Sprites)
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let lastInteractionTime = 0;
+            const clickThreshold = 200; // ms to distinguish drag from click
+
+            function onPointerMove(event) {
+                const rect = renderer.domElement.getBoundingClientRect();
+                mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+                
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(hotspotMeshes);
+                
+                // Reset all icons
+                hotspotMeshes.forEach(mesh => {
+                    mesh.scale.set(mesh.userData.originalScale, mesh.userData.originalScale, 1);
+                    mesh.material.opacity = 1;
+                });
+                
+                if (intersects.length > 0) {
+                    renderer.domElement.style.cursor = 'pointer';
+                    // Highlight hovered icon
+                    intersects[0].object.scale.set(1.8, 2.1, 1);
+                    intersects[0].object.material.opacity = 1.2;
+                } else {
+                    renderer.domElement.style.cursor = 'grab';
+                }
+            }
+            renderer.domElement.addEventListener('pointermove', onPointerMove);
+            renderer.domElement.addEventListener('pointerdown', () => { lastInteractionTime = performance.now(); });
+
+            function onPointerClick() {
+                if (performance.now() - lastInteractionTime > clickThreshold) return;
+                
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(hotspotMeshes);
+
+                if (intersects.length > 0) {
+                    const intersectedObject = intersects[0].object;
+                    if (intersectedObject.userData.url) {
+                        window.open(intersectedObject.userData.url, '_blank');
+                    }
+                }
+            }
+            renderer.domElement.addEventListener('click', onPointerClick);
+
+
+            // 9. Handle Resize
+            window.addEventListener('resize', onWindowResize, false);
+            function onWindowResize() {
+                const width = brainContainer.clientWidth;
+                const height = brainContainer.clientHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
+
+            // 10. Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                if (brainModel) {
+                    brainModel.rotation.x += 0.0005;
+                    brainModel.rotation.y += 0.001;
+                }
+
+                if (neuronParticles) {
+                    neuronParticles.rotation.y += 0.0003;
+                    neuronParticles.rotation.x -= 0.0001;
+                }
+
+                if (controls) {
+                    controls.update(); 
+                }
+
+                // Update wireframe color based on current theme
+                const isDark = htmlElement.classList.contains('dark');
+                const wireframeColor = isDark ? 0xffd700 : 0x1F2937; 
+                brainModel.material.color.set(wireframeColor);
+
+                renderer.render(scene, camera);
+            }
+            
+            // Note: The animate function is now called after theme initialization in window.onload
+            animate(); 
+        }
+        
+    </script>
+
+</body>
+</html>
