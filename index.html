@@ -68,7 +68,8 @@
             position: absolute; 
             top: 0;
             left: 0;
-            z-index: 1; 
+            z-index: 1;
+            touch-action: none; /* Prevent browser touch gestures */ 
         }
         /* Initial positioning for the 3D model hint */
         #brain-hint {
@@ -170,7 +171,7 @@
                 </div>
                 <!-- Placeholder for a personal image -->
                 <div class="rounded-xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-dark-bg p-10 text-center border-4 border-gray-300 dark:border-gray-800">
-                    <img src="porfessional_header.jpg" alt="Professional headshot" class="w-full h-auto rounded-xl object-cover border-8 border-golden/50">
+                    <img src="professional_header.jpg" alt="Professional headshot" class="w-full h-auto rounded-xl object-cover border-8 border-golden/50">
                 </div>
             </div>
         </section>
@@ -532,6 +533,18 @@
                 controls.maxDistance = 15;
                 controls.enablePan = false; 
                 controls.target.set(0, 0, 0);
+                
+                // CRITICAL: Configure touch controls to not interfere with taps
+                controls.touches = {
+                    ONE: THREE.TOUCH.ROTATE,
+                    TWO: THREE.TOUCH.DOLLY_PAN
+                };
+                
+                // Track when controls are actively being used
+                controls.addEventListener('start', () => { isDragging = true; });
+                controls.addEventListener('end', () => { 
+                    setTimeout(() => { isDragging = false; }, 50); 
+                });
             } else {
                 console.error("OrbitControls failed to load.");
                 controls = null;
@@ -611,99 +624,121 @@
                 hotspotMeshes.push(hotspotIcon); 
             });
             
-            // 8. Raycasting for Interaction (Clicking the Sprites)
+            // 8. Raycasting for Interaction - MOBILE-OPTIMIZED
             const raycaster = new THREE.Raycaster();
+            raycaster.params.Sprite = raycaster.params.Sprite || {};
+            raycaster.params.Sprite.threshold = 3;
             const mouse = new THREE.Vector2();
-            let lastInteractionTime = 0;
-            const clickThreshold = 200; // ms to distinguish drag from click
+            let isDragging = false;
+            let pointerDownTime = 0;
+            let pointerDownPos = { x: 0, y: 0 };
 
-            function onPointerMove(event) {
+            function updateMousePosition(clientX, clientY) {
                 const rect = renderer.domElement.getBoundingClientRect();
-                mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-                mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-                
-                raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObjects(hotspotMeshes);
-                
-                // Reset all icons
-                hotspotMeshes.forEach(mesh => {
-                    mesh.scale.set(mesh.userData.originalScale, mesh.userData.originalScale, 1);
-                    mesh.material.opacity = 1;
-                });
-                
-                if (intersects.length > 0) {
-                    renderer.domElement.style.cursor = 'pointer';
-                    // Highlight hovered icon
-                    intersects[0].object.scale.set(1.8, 2.1, 1);
-                    intersects[0].object.material.opacity = 1.2;
-                } else {
-                    renderer.domElement.style.cursor = 'grab';
-                }
+                mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
             }
-            
-            function updateMouseFromEvent(event) {
-                const rect = renderer.domElement.getBoundingClientRect();
-                if (event.touches && event.touches.length > 0) {
-                    mouse.x = ((event.touches[0].clientX - rect.left) / rect.width) * 2 - 1;
-                    mouse.y = -((event.touches[0].clientY - rect.top) / rect.height) * 2 + 1;
-                } else {
-                    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-                    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-                }
-            }
-            
-            let touchStartPos = { x: 0, y: 0 };
-            const dragThreshold = 10; // pixels
-            
-            function onTouchMove(event) {
-                updateMouseFromEvent(event);
-            }
-            
-            function onTouchStart(event) {
-                updateMouseFromEvent(event);
-                lastInteractionTime = performance.now();
-                touchStartPos.x = event.touches[0].clientX;
-                touchStartPos.y = event.touches[0].clientY;
-            }
-            
-            function onTouchEnd(event) {
-                const touchEndPos = {
-                    x: event.changedTouches[0].clientX,
-                    y: event.changedTouches[0].clientY
-                };
-                
-                const distance = Math.sqrt(
-                    Math.pow(touchEndPos.x - touchStartPos.x, 2) + 
-                    Math.pow(touchEndPos.y - touchStartPos.y, 2)
-                );
-                
-                // Only trigger click if it wasn't a drag
-                if (distance < dragThreshold && performance.now() - lastInteractionTime < clickThreshold) {
-                    updateMouseFromEvent(event);
-                    onPointerClick();
-                }
-            }
-            
-            renderer.domElement.addEventListener('pointermove', onPointerMove);
-            renderer.domElement.addEventListener('pointerdown', () => { lastInteractionTime = performance.now(); });
-            renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: true });
-            renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: true });
-            renderer.domElement.addEventListener('touchend', onTouchEnd, { passive: true });
 
-            function onPointerClick() {
-                if (performance.now() - lastInteractionTime > clickThreshold) return;
-                
+            function checkAndOpenLink(clientX, clientY) {
+                updateMousePosition(clientX, clientY);
                 raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObjects(hotspotMeshes);
-
+                const intersects = raycaster.intersectObjects(hotspotMeshes, true);
+                
+                console.log('Checking for intersects at', clientX, clientY);
+                console.log('Found intersects:', intersects.length);
+                
                 if (intersects.length > 0) {
                     const intersectedObject = intersects[0].object;
+                    console.log('Hit object:', intersectedObject.userData.label);
+                    
                     if (intersectedObject.userData.url) {
-                        window.open(intersectedObject.userData.url, '_blank');
+                        console.log('Opening URL:', intersectedObject.userData.url);
+                        
+                        // CRITICAL: Open synchronously inside the user gesture event
+                        const url = intersectedObject.userData.url;
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                        
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // CRITICAL: Use pointerdown instead of click for mobile
+            function onPointerDown(event) {
+                pointerDownTime = Date.now();
+                pointerDownPos.x = event.clientX;
+                pointerDownPos.y = event.clientY;
+                isDragging = false;
+                
+                console.log('Pointer down at', event.clientX, event.clientY);
+            }
+
+            function onPointerMove(event) {
+                // Track if user is dragging
+                if (pointerDownTime > 0) {
+                    const dx = event.clientX - pointerDownPos.x;
+                    const dy = event.clientY - pointerDownPos.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance > 5) {
+                        isDragging = true;
+                    }
+                }
+                
+                // Desktop hover effects only
+                if (event.pointerType !== 'touch' && !isDragging) {
+                    updateMousePosition(event.clientX, event.clientY);
+                    raycaster.setFromCamera(mouse, camera);
+                    const intersects = raycaster.intersectObjects(hotspotMeshes, true);
+                    
+                    hotspotMeshes.forEach(mesh => {
+                        if (mesh.userData.originalScale) {
+                            mesh.scale.set(mesh.userData.originalScale, mesh.userData.originalScale * 1.2, 1);
+                        }
+                    });
+                    
+                    if (intersects.length > 0) {
+                        renderer.domElement.style.cursor = 'pointer';
+                        const icon = intersects[0].object;
+                        if (icon.userData.originalScale) {
+                            icon.scale.set(1.8, 2.1, 1);
+                        }
+                    } else {
+                        renderer.domElement.style.cursor = 'grab';
                     }
                 }
             }
-            renderer.domElement.addEventListener('click', onPointerClick);
+
+            function onPointerUp(event) {
+                const pointerUpTime = Date.now();
+                const timeDiff = pointerUpTime - pointerDownTime;
+                
+                const dx = event.clientX - pointerDownPos.x;
+                const dy = event.clientY - pointerDownPos.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                console.log('Pointer up - distance:', distance, 'time:', timeDiff, 'isDragging:', isDragging);
+                
+                // Only treat as tap if it was quick and didn't move much
+                if (!isDragging && distance < 10 && timeDiff < 400) {
+                    // Temporarily disable controls to prevent interference
+                    if (controls) {
+                        controls.enabled = false;
+                        setTimeout(() => { controls.enabled = true; }, 150);
+                    }
+                    
+                    checkAndOpenLink(event.clientX, event.clientY);
+                }
+                
+                pointerDownTime = 0;
+                isDragging = false;
+            }
+
+            // Use pointer events (works on both desktop and mobile)
+            renderer.domElement.addEventListener('pointerdown', onPointerDown);
+            renderer.domElement.addEventListener('pointermove', onPointerMove);
+            renderer.domElement.addEventListener('pointerup', onPointerUp);
 
 
             // 9. Handle Resize
@@ -721,13 +756,13 @@
                 requestAnimationFrame(animate);
                 
                 if (brainModel) {
-                    brainModel.rotation.x += 0.0005;
-                    brainModel.rotation.y += 0.001;
+                    brainModel.rotation.x += 0.0001;
+                    brainModel.rotation.y += 0.0001;
                 }
 
                 if (neuronParticles) {
-                    neuronParticles.rotation.y += 0.0003;
-                    neuronParticles.rotation.x -= 0.0001;
+                    neuronParticles.rotation.y += 0.00003;
+                    neuronParticles.rotation.x -= 0.00005;
                 }
 
                 if (controls) {
