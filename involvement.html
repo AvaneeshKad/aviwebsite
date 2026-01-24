@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Involvement - Avaneesh Kad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'golden': '#FFD700',
+                        'silver': '#C0C0C0',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#18181B',
+                        'light-bg': '#F9FAFB',
+                        'light-card': '#FFFFFF',
+                        'uc-red': '#E00122',
+                        'uc-black': '#000000'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .org-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .org-card:hover {
+            border-left-color: #FFD700;
+            transform: translateX(8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .logo-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-sm shadow-xl border-b border-gray-200 dark:border-gray-700/50">
+        <div class="max-width-7xl mx-auto px-4 sm:px-8 lg:px-12 py-6 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-golden hover:text-silver transition duration-150">Avaneesh Kad</a>
+            <nav class="hidden md:flex space-x-10 items-center">
+                <a href="index.html#about" class="text-xl hover:text-golden transition">About</a>
+                <a href="index.html#skills" class="text-xl hover:text-golden transition">Expertise</a>
+                <a href="index.html#portfolio" class="text-xl hover:text-golden transition">Projects</a>
+                <a href="honors.html" class="text-xl hover:text-golden transition">Honors</a>
+                <a href="involvement.html" class="text-xl hover:text-golden transition font-semibold">Involvement</a>
+                <a href="index.html#contact" class="text-xl hover:text-golden transition">Contact</a>
+                <button id="theme-toggle" class="p-3 rounded-full hover:bg-gray-100 dark:hover:bg-dark-card transition">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </nav>
+            <button class="md:hidden p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-card transition" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-6 border-t border-gray-200 dark:border-gray-700/50">
+            <nav class="flex flex-col space-y-3 px-6">
+                <a href="index.html#about" class="py-3 text-xl hover:text-golden transition">About</a>
+                <a href="index.html#skills" class="py-3 text-xl hover:text-golden transition">Expertise</a>
+                <a href="index.html#portfolio" class="py-3 text-xl hover:text-golden transition">Projects</a>
+                <a href="honors.html" class="py-3 text-xl hover:text-golden transition">Honors</a>
+                <a href="involvement.html" class="py-3 text-xl hover:text-golden transition font-semibold">Involvement</a>
+                <a href="index.html#contact" class="py-3 text-xl hover:text-golden transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-20">
+        
+        <!-- Page Header -->
+        <div class="text-center mb-20">
+            <h1 class="text-6xl md:text-7xl font-extrabold mb-6">
+                Campus <span class="text-golden">Involvement</span>
+            </h1>
+            <p class="text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Building community, developing leadership, and making an impact at the University of Cincinnati
+            </p>
+        </div>
+
+        <!-- Organizations Grid -->
+        <div class="space-y-8">
+            
+            <!-- IEEE at UC -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-4xl font-bold">
+                            IEEE
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">IEEE at UC</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            The Institute of Electrical and Electronics Engineers (IEEE) is the world's largest technical professional society with over 320,000 members. As a member of the UC student branch, I participate in professional development events, technical workshops, mock interviews, and networking opportunities that enhance my engineering skills and connect me with industry professionals.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Professional Development</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Technical Workshops</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Networking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACM at UC -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-4xl font-bold" style="background: linear-gradient(135deg, #0066b2 0%, #003d82 100%);">
+                            ACM
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">Association for Computing Machinery (ACM) at UC</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            ACM@UC is the University of Cincinnati's premier computer science and programming community. We host talks, workshops, office hours, social events, and hackathons including RevolutionUC. As an ACM member, I engage with cutting-edge technology topics, collaborate on coding projects, and connect with fellow computing enthusiasts.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Hackathons</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Programming</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Tech Talks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CEAS Tribunal -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-3xl font-bold" style="background: linear-gradient(135deg, #E00122 0%, #8B0000 100%);">
+                            CEAS
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">CEAS Tribunal</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            The Engineering and Applied Science Tribunal represents students of the College of Engineering and Applied Science on all relevant issues, specifically with curriculum, academic and professional standards, and university computing. As a member, I advocate for student voices and help shape the future of CEAS education.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Student Advocacy</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Leadership</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Policy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CubeCats -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-2xl font-bold" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+                            🛰️
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">CubeCats (CATiSE)</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            UC CubeCats is dedicated to the education of members through the design, construction, and launch of CubeSats - small satellites developed by universities worldwide. This hands-on experience in aerospace engineering allows me to work on real space technology and contribute to UC's presence in the satellite industry.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Aerospace</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">CubeSats</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Space Technology</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IPALs -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-4xl font-bold" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                            🌍
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">International Partners and Leaders (IPALs)</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            IPALs is a student group sponsored by UC International, bringing together international and domestic students to build a diverse community. As an IPAL, I help international students settle and acclimate to UC and Cincinnati through cultural events, social gatherings, and mentorship, fostering cross-cultural understanding and friendship.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Cultural Exchange</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Mentorship</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Community Building</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC AI -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-4xl font-bold" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                            🤖
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">UC AI Community</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            The University of Cincinnati is establishing itself as a beacon of AI excellence through the AI Enablement Community of Practice. I participate in initiatives exploring artificial intelligence's transformative power in higher education, focusing on teaching, learning, research, ethics, and community impact. This involvement keeps me at the forefront of AI innovation and responsible technology development.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Artificial Intelligence</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Machine Learning</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">AI Ethics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amhi Marathi -->
+            <div class="org-card bg-light-card dark:bg-dark-card rounded-2xl shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 logo-placeholder rounded-xl flex items-center justify-center text-white text-3xl font-bold" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);">
+                            🇮🇳
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-golden mb-3">Aamhi Marathi Student Association</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            Aamhi Marathi Student Association fosters a sense of community among Marathi-speaking students at UC. We celebrate cultural events like Diwali and Ganesh Chaturthi, organize workshops on traditional Marathi arts and cooking, and create a supportive environment for cultural enrichment. Through this organization, I help promote diversity and inclusion while maintaining connections to my cultural heritage.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Cultural Heritage</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Community</span>
+                            <span class="px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium">Diversity & Inclusion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-20 text-center bg-gradient-to-r from-golden to-silver p-12 rounded-2xl">
+            <h2 class="text-4xl font-bold text-dark-bg mb-4">Interested in Getting Involved?</h2>
+            <p class="text-xl text-dark-bg mb-8">UC has over 600 student organizations. Find your community!</p>
+            <a href="https://campuslink.uc.edu" target="_blank" class="inline-block px-10 py-4 bg-dark-bg text-golden text-xl font-bold rounded-full shadow-lg hover:bg-gray-900 transition duration-300">
+                Explore UC Organizations →
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light-card dark:bg-dark-card text-gray-500 py-10 mt-20 border-t border-gray-200 dark:border-gray-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 text-center">
+            <p class="text-lg">&copy; 2025 Avaneesh Kad. Building community through technology.</p>
+            <div class="flex justify-center space-x-8 mt-6 text-lg">
+                <a href="index.html#about" class="hover:text-golden transition">About</a>
+                <a href="index.html#skills" class="hover:text-golden transition">Expertise</a>
+                <a href="honors.html" class="hover:text-golden transition">Honors</a>
+                <a href="index.html#contact" class="hover:text-golden transition">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        const sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        const moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+        function setIcon(isDark) {
+            themeIcon.innerHTML = isDark ? sunIcon : moonIcon;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                setIcon(true);
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                setIcon(false);
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+        }
+
+        window.onload = function() {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+    </script>
+
+</body>
+</html>
