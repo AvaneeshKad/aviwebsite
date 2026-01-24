@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 - My Year in Review | Avaneesh Kad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'accent': '#FF6B6B',
+                        'accent-dark': '#C92A2A',
+                        'sage': '#95D5B2',
+                        'ocean': '#4ECDC4',
+                        'sunset': '#FFB347',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .reflection-text {
+            font-family: Georgia, serif;
+            font-size: 1.25rem;
+            line-height: 2;
+            text-align: justify;
+        }
+        
+        .quote-block {
+            border-left: 5px solid #FF6B6B;
+            padding-left: 2rem;
+            margin: 3rem 0;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #4A5568;
+        }
+        
+        .dark .quote-block {
+            color: #CBD5E0;
+            border-left-color: #4ECDC4;
+        }
+        
+        .section-divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #FF6B6B, #4ECDC4);
+            margin: 3rem auto;
+        }
+        
+        .parallax-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark .parallax-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .dark .highlight-box {
+            background: linear-gradient(135deg, rgba(78,205,196,0.1) 0%, rgba(149,213,178,0.1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-md z-50 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="year-in-review.html" class="text-2xl font-bold text-accent dark:text-ocean hover:opacity-80 transition">
+                ← Back to Timeline
+            </a>
+            <button id="theme-toggle" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition" aria-label="Toggle theme">
+                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="parallax-header pt-20">
+        <div class="text-center text-white px-6 floating">
+            <h1 class="text-7xl md:text-9xl font-extrabold mb-4 drop-shadow-lg">2026</h1>
+            <p class="text-2xl md:text-3xl opacity-90 font-light">A Year of Growth, Discovery, and Impact</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-20">
+        
+        <!-- Introduction -->
+        <section class="mb-16">
+            <div class="text-center mb-11">
+                <h2 class="text-5xl font-bold mb-4 bg-gradient-to-r from-accent to-ocean bg-clip-text text-transparent">
+                    Reflecting on 2026
+                </h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="reflection-text text-gray-700 dark:text-gray-300">
+                <p class="mb-6">
+                    My 2026 Reflection 
+
+                    [Main Body]
+
+                    [Conclusion]
+            </div>
+        </section>
+
+        <!-- Quote Block -->
+        <div class="quote-block dark:text-gray-300">
+            "The most powerful quote or lesson from 2026 goes here. Make it meaningful and reflective of your journey."
+        </div>
+
+        <!-- Photo Gallery Section -->
+        <section class="my-20">
+            <h3 class="text-4xl font-bold text-center mb-12 text-accent dark:text-ocean">Moments Worth Remembering</h3>
+            
+            <div class="photo-grid">
+                <!-- Photo 1 -->
+                <div class="photo-card">
+                    <div class="photo-placeholder">
+                        📸
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800">
+                        <p class="text-center font-semibold">Photo Caption 1</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 2 -->
+                <div class="photo-card">
+                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        📸
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800">
+                        <p class="text-center font-semibold">Photo Caption 2</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 3 -->
+                <div class="photo-card">
+                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        📸
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800">
+                        <p class="text-center font-semibold">Photo Caption 3</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 4 -->
+                <div class="photo-card">
+                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        📸
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800">
+                        <p class="text-center font-semibold">Photo Caption 4</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 5 -->
+                <div class="photo-card">
+                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        📸
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800">
+                        <p class="text-center font-semibold">Photo Caption 5</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 6 -->
+                <div class="photo-card">
+                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        📸
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800">
+                        <p class="text-center font-semibold">Photo Caption 6</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Highlights -->
+        <section class="my-20">
+            <h3 class="text-4xl font-bold text-center mb-12 text-accent dark:text-ocean">The Highlights Reel</h3>
+            
+            <div class="space-y-6">
+                <div class="highlight-box">
+                    <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">🎯 Biggest Achievement</h4>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        My Biggest achievement is ...
+                    </p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">💡 Most Important Lesson</h4>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        The most important lesson is ...
+                    </p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">🌟 Favorite Memory</h4>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        My favourite memory is ...
+                    </p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">🚀 Looking Ahead</h4>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        In 2027, I will ...
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Reflection -->
+        <section class="my-20">
+            <div class="section-divider"></div>
+            <div class="reflection-text text-gray-700 dark:text-gray-300 mt-12">
+                
+                <p class="text-center text-2xl font-bold mt-12 bg-gradient-to-r from-accent to-ocean bg-clip-text text-transparent">
+                    Here's to 2026 - a year I'll never forget. 🥂
+                </p>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="my-20 bg-gradient-to-r from-accent/10 to-ocean/10 dark:from-ocean/20 dark:to-sage/20 rounded-2xl p-12">
+            <h3 class="text-4xl font-bold text-center mb-12 text-accent dark:text-ocean">2026 By The Numbers</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">Projects Completed</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">Countries Visited</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">Books Read</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">New Friends Made</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-12 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                <a href="year-in-review.html" class="text-accent dark:text-ocean hover:underline font-semibold">← Back to Year in Review Timeline</a>
+            </p>
+            <p class="text-gray-500 dark:text-gray-500">&copy; 2026 Avaneesh Kad. All memories preserved with love.</p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        const sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        const moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+        function setIcon(isDark) {
+            themeIcon.innerHTML = isDark ? sunIcon : moonIcon;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                setIcon(true);
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                setIcon(false);
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+        }
+
+        window.onload = function() {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+    </script>
+
+</body>
+</html>
