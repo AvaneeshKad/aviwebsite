@@ -170,7 +170,7 @@
                 </div>
                 <!-- Placeholder for a personal image -->
                 <div class="rounded-xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-dark-bg p-10 text-center border-4 border-gray-300 dark:border-gray-800">
-                    <img src="/home/avaneesh/Pictures/Transfer photos from mobile/20250913_095023.jpg" alt="Professional headshot" class="w-full h-auto rounded-xl object-cover border-8 border-golden/50">
+                    <img src="porfessional_header.jpg" alt="Professional headshot" class="w-full h-auto rounded-xl object-cover border-8 border-golden/50">
                 </div>
             </div>
         </section>
@@ -652,30 +652,43 @@
                 }
             }
             
+            let touchStartPos = { x: 0, y: 0 };
+            const dragThreshold = 10; // pixels
+            
             function onTouchMove(event) {
-                event.preventDefault();
                 updateMouseFromEvent(event);
-                onPointerMove(event);
             }
             
             function onTouchStart(event) {
-                event.preventDefault();
                 updateMouseFromEvent(event);
                 lastInteractionTime = performance.now();
+                touchStartPos.x = event.touches[0].clientX;
+                touchStartPos.y = event.touches[0].clientY;
             }
             
             function onTouchEnd(event) {
-                event.preventDefault();
-                if (performance.now() - lastInteractionTime < clickThreshold) {
+                const touchEndPos = {
+                    x: event.changedTouches[0].clientX,
+                    y: event.changedTouches[0].clientY
+                };
+                
+                const distance = Math.sqrt(
+                    Math.pow(touchEndPos.x - touchStartPos.x, 2) + 
+                    Math.pow(touchEndPos.y - touchStartPos.y, 2)
+                );
+                
+                // Only trigger click if it wasn't a drag
+                if (distance < dragThreshold && performance.now() - lastInteractionTime < clickThreshold) {
+                    updateMouseFromEvent(event);
                     onPointerClick();
                 }
             }
             
             renderer.domElement.addEventListener('pointermove', onPointerMove);
             renderer.domElement.addEventListener('pointerdown', () => { lastInteractionTime = performance.now(); });
-            renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
-            renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
-            renderer.domElement.addEventListener('touchend', onTouchEnd, { passive: false });
+            renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: true });
+            renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: true });
+            renderer.domElement.addEventListener('touchend', onTouchEnd, { passive: true });
 
             function onPointerClick() {
                 if (performance.now() - lastInteractionTime > clickThreshold) return;
