@@ -165,18 +165,32 @@
 
         <!-- About Me Section -->
         <section id="about" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 bg-light-card dark:bg-dark-card rounded-xl shadow-2xl my-20 mx-4 border-l-8 border-golden">
-            <h2 class="text-5xl font-bold text-center mb-16 text-golden pb-4 inline-block mx-auto border-b-4 border-silver/50">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6 text-xl text-gray-600 dark:text-gray-300">
-                    <p>I am a computer science major at the University of Cincinnati and I came here all the way from Pune, India to start my bachelors degree. Since I was a little kid I always wanted to be an engineer because I think the way technology works is so cool and fascinating. My main focus is on artificial intelligence because I want to build systems that are easy for people to use. I am someone who loves exploring new tech but I am also passionate about making new connections and go beyond academics, so I’ve joined a bunch of student clubs on campus to get involved. </p>                    
-                    <a href="#contact" class="mt-8 inline-block text-golden text-xl font-semibold hover:underline">Let's Collaborate &rarr;</a>
+            <h2 class="text-5xl font-bold text-center mb-16 text-golden pb-4 inline-block mx-auto border-b-4 border-silver/50 w-full">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start"> <div class="flex flex-col justify-between h-full space-y-8">
+                    <div class="space-y-6 text-xl text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
+                        <p>
+                            I am a Computer Science major at the University of Cincinnati who is passionate about building connections and going beyond just academics. I am from Pune, India, and I have wanted to be an engineer since the very beginning of my school years. I find it really cool to build high-tech devices and unlock new things we can do in the future. Because of this, I got interested in artificial intelligence and decided to get a degree in computer science. I love to deep dive into electronic and software systems, basically anything that only understands 1s and 0s. Outside of school, I love traveling to unique, scenic places that typical tourists don't visit. This is a bonus I get from my huge interest in birdwatching and wildlife photography. I am also a sporty person. I played and practiced Table Tennis for eight years and I also enjoy swimming and running marathons.
+                        </p>
+                        <p>
+                            I am choosing the University of Cincinnati because of its great CS classes like Artificial Intelligence and Database Design. Since starting here, I am finding many opportunities to improve, learn, and meet new people. I am now participating in the University Honors Program (UHP), which is giving me more chances to help society and support communities through innovation. I am consistently attending student organization meetings, which is helping me boost my confidence by talking to people from all over. These groups are allowing me to take part in challenges and hackathons where I am unlocking new skills and getting better at my work. I am showing up to almost every CS event on campus because I am looking forward to learning more and reaching my milestones.
+                        </p>
+                    </div>
+
+                    <div class="text-gray-600 dark:text-gray-300">
+                        <h3 class="text-2xl font-bold text-golden mb-2">Education</h3>
+                            <p class="text-xl font-semibold">University of Cincinnati</p>
+                            <p class="text-lg opacity-80">Graduation Expected: 2030</p>
+                    </div>
+            
+                    <a href="#contact" class="inline-block text-golden text-xl font-semibold hover:underline">Let's Collaborate &rarr;</a>
                 </div>
-                <!-- Placeholder for a personal image -->
-                <div class="rounded-xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-dark-bg p-10 text-center border-4 border-gray-300 dark:border-gray-800">
+
+                <div class="rounded-xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-dark-bg p-4 text-center border-4 border-gray-300 dark:border-gray-800">
                     <img src="avi.gif" alt="Professional headshot" class="w-full h-auto rounded-xl object-cover border-8 border-golden/50">
                 </div>
             </div>
         </section>
+
 
         <!-- Skills Section -->
         <section id="skills" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 bg-light-bg dark:bg-dark-bg">
@@ -221,23 +235,23 @@
             <h2 class="text-5xl font-bold text-center mb-16 text-golden pb-4 inline-block mx-auto border-b-4 border-silver/50">Featured Data Projects</h2>
             
             <div class="grid md:grid-cols-2 gap-10">
-                <!-- Project Card 1 (ML) -->
+                <!-- Project Card 1 (NASA Space Apps) -->
                 <div class="bg-light-bg dark:bg-dark-bg rounded-xl shadow-xl overflow-hidden group border-2 border-gray-300 dark:border-gray-700 hover:border-golden transition duration-300">
-                    <img src="https://placehold.co/800x500/FFD700/0A0A0A?text=Predictive+Model" alt="Financial Forecasting Model Project" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+                    <img src="nasaapps.jpg" alt="NASA Space Apps Challenge 2025 Project" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
                     <div class="p-8">
-                        <h3 class="text-3xl font-bold text-golden mb-3">Financial Forecasting Model</h3>
-                        <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Developed a robust time-series model using **Deep Learning** (LSTM) to predict quarterly financial volatility with 92% accuracy.</p>
-                        <a href="#" class="text-xl text-gray-600 dark:text-silver hover:text-golden hover:underline font-medium">View Model Documentation &rarr;</a>
+                        <h3 class="text-3xl font-bold text-golden mb-3">NASA Space Apps Challenge 2025 - Project Solomon</h3>
+                        <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Developed a predictive model using supervised machine learning and feature engineering to automate the classification of exoplanets from the open-source Kepler Data set. Utilized deep learning architectures and exploratory data analysis (EDA) to achieve high-accuracy detection and pattern recognition within complex astronomical time-series data.</p>
+                        <a href="https://www.spaceappschallenge.org/2025/find-a-team/solomon/?tab=project" target="_blank" class="text-xl text-gray-600 dark:text-silver hover:text-golden hover:underline font-medium">View Project Details &rarr;</a>
                     </div>
                 </div>
 
-                <!-- Project Card 2 (Data Engineering) -->
+                <!-- Project Card 2 (MakeUC) -->
                 <div class="bg-light-bg dark:bg-dark-bg rounded-xl shadow-xl overflow-hidden group border-2 border-gray-300 dark:border-gray-700 hover:border-golden transition duration-300">
-                    <img src="https://placehold.co/800x500/C0C0C0/0A0A0A?text=ETL+Pipeline" alt="Real-time ETL Pipeline Project" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+                    <img src="neuroviz.jpg" alt="MakeUC 25 NeuroViz Project" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
                     <div class="p-8">
-                        <h3 class="text-3xl font-bold text-golden mb-3">Scalable ETL Pipeline</h3>
-                        <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Engineered a real-time data processing pipeline on **Cloud Platforms** (GCP/AWS) to ingest and clean 1TB of streaming event data daily.</p>
-                        <a href="#" class="text-xl text-gray-600 dark:text-silver hover:text-golden hover:underline font-medium">View Deployment Details &rarr;</a>
+                        <h3 class="text-3xl font-bold text-golden mb-3">MakeUC 25 - NeuroViz</h3>
+                        <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Developed a convolutional neural network (CNN) using PyTorch to perform image classification on the MNIST dataset, augmented by a custom-engineered synthetic dataset to improve model generalization. Integrated MediaPipe for real-time finger tracking and hand landmark detection, mapping spatial coordinates to a computer vision pipeline for interactive, gesture-driven data visualization.</p>
+                        <a href="https://devpost.com/software/neuroviz" target="_blank" class="text-xl text-gray-600 dark:text-silver hover:text-golden hover:underline font-medium">View Project on Devpost &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -247,7 +261,7 @@
         <section id="contact" class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 text-center">
             <h2 class="text-5xl font-bold text-center mb-8 text-dark-text dark:text-silver pb-4 inline-block mx-auto border-b-4 border-golden/50">Get In Touch</h2>
             <p class="text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-16">
-                I'm currently seeking challenging Data Science roles and consulting opportunities. Let's discuss your next massive data problem.
+                I'm currently seeking challenging Data Science roles. Let's discuss your next massive data problem.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8">
