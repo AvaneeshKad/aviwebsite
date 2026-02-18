@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway - Avaneesh Kad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'golden': '#FFD700',
+                        'silver': '#C0C0C0',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#18181B',
+                        'light-bg': '#F9FAFB',
+                        'light-card': '#FFFFFF',
+                        'dark-text': '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .main-content {
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="bg-light-bg dark:bg-dark-bg font-sans text-dark-text dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-sm shadow-xl dark:shadow-gray-900/50 border-b border-gray-200 dark:border-gray-700/50">
+        <div class="main-content px-2 sm:px-4 lg:px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-golden hover:text-silver transition duration-150 whitespace-nowrap -ml-2 sm:-ml-4 lg:-ml-6">Avaneesh Kad</a>
+            <nav class="hidden md:flex space-x-10 items-center">
+                <a href="index.html#about" class="text-xl hover:text-golden transition duration-150 font-medium whitespace-nowrap">About Me</a>
+                <a href="index.html#skills" class="text-xl hover:text-golden transition duration-150 font-medium">Expertise</a>
+                <a href="index.html#portfolio" class="text-xl hover:text-golden transition duration-150 font-medium">Projects</a>
+                <a href="honors.html" class="text-xl hover:text-golden transition duration-150 font-medium">Honors</a>
+                <a href="gateway.html" class="text-xl hover:text-golden transition duration-150 font-medium text-golden">Gateway</a>
+                <a href="involvement.html" class="text-xl hover:text-golden transition duration-150 font-medium">Involvement</a>
+                <a href="year-in-review.html" class="text-xl hover:text-golden transition duration-150 font-medium whitespace-nowrap">Year-in-Review</a>
+                <a href="index.html#contact" class="text-xl hover:text-golden transition duration-150 font-medium">Contact</a>
+                <button id="theme-toggle" class="p-3 rounded-full text-dark-text dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-card transition duration-150" aria-label="Toggle theme">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center md:hidden space-x-2">
+                <button id="mobile-theme-toggle" class="p-3 rounded-full text-dark-text dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-card transition duration-150" aria-label="Toggle theme">
+                    <svg id="mobile-theme-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="p-3 rounded-lg text-dark-text dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-card transition duration-150" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="md:hidden hidden pb-6 border-t border-gray-200 dark:border-gray-700/50">
+            <nav class="flex flex-col space-y-3 px-6">
+                <a href="index.html#about" class="py-3 text-xl hover:text-golden transition duration-150">About Me</a>
+                <a href="index.html#skills" class="py-3 text-xl hover:text-golden transition duration-150">Expertise</a>
+                <a href="index.html#portfolio" class="py-3 text-xl hover:text-golden transition duration-150">Projects</a>
+                <a href="honors.html" class="py-3 text-xl hover:text-golden transition duration-150">Honors</a>
+                <a href="gateway.html" class="py-3 text-xl text-golden transition duration-150">Gateway</a>
+                <a href="involvement.html" class="py-3 text-xl hover:text-golden transition duration-150">Involvement</a>
+                <a href="year-in-review.html" class="py-3 text-xl hover:text-golden transition duration-150">Year-in-Review</a>
+                <a href="index.html#contact" class="py-3 text-xl hover:text-golden transition duration-150">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <!-- Hero Section -->
+        <section class="py-20 md:py-32 px-4 sm:px-8 lg:px-12 text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6">
+                Gateway <span class="text-golden">Tab Reflection</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-silver max-w-3xl mx-auto">
+                Showcase: The Lesson Behind the Code
+            </p>
+        </section>
+
+        <!-- Reflection Content -->
+        <section class="py-10 md:py-16 px-4 sm:px-8 lg:px-12">
+            <div class="max-w-5xl mx-auto flex flex-col gap-10">
+
+                <!-- The What -->
+                <div class="p-10 bg-light-card dark:bg-dark-card rounded-xl shadow-xl border-l-8 border-golden">
+                    <h3 class="text-2xl font-bold text-dark-text dark:text-gray-100 mb-4">The What</h3>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        As a freshman Computer Science student, I entered a Google Chrome hackathon solo to build an AI-powered Canvas extension. My goal was to use Gemini Nano to prioritize assignments based on difficulty and deadlines. Being new to the ecosystem, I struggled with the basics like virtual environments, file directories, and dependencies. I spent hours daily sitting in the Mantei Center for a week debugging these "silly" errors, only to realize on submission day that I had not taken any necessary Canvas API permissions. While the UI was finished, the project was still non-functional because I had skipped the planning phase.
+                    </p>
+                </div>
+
+                <!-- The So What -->
+                <div class="p-10 bg-light-card dark:bg-dark-card rounded-xl shadow-xl border-l-8 border-golden">
+                    <h3 class="text-2xl font-bold text-dark-text dark:text-gray-100 mb-4">The So What</h3>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        This experience was a great reality check. I remembered what I was taught in my ENED course that coding is only one part of the Engineering Design Process. By bypassing the research and brainstorming phases, I failed to anticipate technical risks or verify the feasibility of actually making my project. I realized that technical skills, even with the help of AI, are not enough. Lack of structural planning would always cause some or the other problems. Hard work in the wrong direction is still a setback. A successful project requires a roadmap before even touching the first line of code.
+                    </p>
+                    <!-- EDP Image -->
+                    <div class="mt-8 flex justify-center">
+                        <img src="engineering-design-process.jpeg" alt="Engineering Design Process diagram" class="rounded-xl shadow-2xl max-w-full md:max-w-lg w-full" />
+                    </div>
+                </div>
+
+                <!-- The Now What -->
+                <div class="p-10 bg-light-card dark:bg-dark-card rounded-xl shadow-xl border-l-8 border-golden">
+                    <h3 class="text-2xl font-bold text-dark-text dark:text-gray-100 mb-4">The Now What</h3>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Moving forward, I will never skip the preprocess and necessary non-technical steps of a project. I would now prioritize checking if a goal is realistic and measurable before implementation. This experience reshaped my definition of a Global Citizen Scholar. It is someone who combines their technical skills with research to solve problems effectively.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light-card dark:bg-dark-card text-gray-500 py-10 mt-20 border-t border-gray-200 dark:border-gray-700/50">
+        <div class="main-content px-4 sm:px-8 lg:px-12 text-center">
+            <p class="text-lg">&copy; 2025 Avaneesh Kad. Built with <span class="text-golden">Data</span> and <span class="text-silver">Style</span>.</p>
+            <div class="flex justify-center space-x-8 mt-6 text-lg flex-wrap">
+                <a href="index.html#about" class="hover:text-golden transition duration-150">About_Me</a>
+                <a href="index.html#skills" class="hover:text-golden transition duration-150">Expertise</a>
+                <a href="honors.html" class="hover:text-golden transition duration-150">Honors</a>
+                <a href="gateway.html" class="hover:text-golden transition duration-150">Gateway</a>
+                <a href="involvement.html" class="hover:text-golden transition duration-150">Involvement</a>
+                <a href="year-in-review.html" class="hover:text-golden transition duration-150">Year-in-Review</a>
+                <a href="index.html#contact" class="hover:text-golden transition duration-150">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+        const sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        const moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+        function setIcon(isDark) {
+            const icon = isDark ? sunIcon : moonIcon;
+            if (themeIcon) themeIcon.innerHTML = icon;
+            if (mobileThemeIcon) mobileThemeIcon.innerHTML = icon;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                setIcon(true);
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                setIcon(false);
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        }
+
+        window.onload = function() {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+        }
+
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+    </script>
+
+</body>
+</html>
