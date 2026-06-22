@@ -6,6 +6,7 @@
     <title>2026 - My Year in Review | Avaneesh Kad</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -26,17 +27,18 @@
             }
         }
     </script>
+
     <style>
         html {
             scroll-behavior: smooth;
         }
-        
+
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-        
+
         .photo-card {
             position: relative;
             overflow: hidden;
@@ -44,11 +46,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
-        
+
         .photo-card:hover {
             transform: scale(1.05);
         }
-        
+
         .photo-placeholder {
             width: 100%;
             height: 300px;
@@ -59,14 +61,14 @@
             color: white;
             font-size: 3rem;
         }
-        
+
         .reflection-text {
             font-family: Georgia, serif;
             font-size: 1.25rem;
             line-height: 2;
             text-align: justify;
         }
-        
+
         .quote-block {
             border-left: 5px solid #FF6B6B;
             padding-left: 2rem;
@@ -75,19 +77,19 @@
             font-size: 1.5rem;
             color: #4A5568;
         }
-        
+
         .dark .quote-block {
             color: #CBD5E0;
             border-left-color: #4ECDC4;
         }
-        
+
         .section-divider {
             width: 100px;
             height: 4px;
             background: linear-gradient(to right, #FF6B6B, #4ECDC4);
             margin: 3rem auto;
         }
-        
+
         .parallax-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 60vh;
@@ -97,27 +99,27 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .dark .parallax-header {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         }
-        
+
         .floating {
             animation: floating 3s ease-in-out infinite;
         }
-        
+
         @keyframes floating {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-        
+
         .highlight-box {
             background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 100%);
             border-radius: 1rem;
             padding: 2rem;
             margin: 2rem 0;
         }
-        
+
         .dark .highlight-box {
             background: linear-gradient(135deg, rgba(78,205,196,0.1) 0%, rgba(149,213,178,0.1) 100%);
         }
@@ -149,7 +151,7 @@
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-20">
-        
+
         <!-- Introduction -->
         <section class="mb-16">
             <div class="text-center mb-11">
@@ -158,125 +160,61 @@
                 </h2>
                 <div class="section-divider"></div>
             </div>
-            
-            <div class="reflection-text text-gray-700 dark:text-gray-300">
-                <p class="mb-6">
-                    My 2026 Reflection 
 
-                    [Main Body]
-
-                    [Conclusion]
+            <div class="reflection-text text-gray-700 dark:text-gray-300 space-y-6">
+                <p>
+                    This past year at UC was a really big adjustment for me. When I first came here as a freshman studying Computer Science, I was honestly pretty quiet. I usually just preferred sitting behind my laptop screen, working on coding projects by myself. But being in the University Honors Program made me step out of my comfort zone in ways I did not expect. It made me realize that being a good student is not just about hiding in a room and writing code. I also need to learn how to talk to people, handle real responsibilities, and see how the things I build actually affect the real world.
+                </p>
+                <p>
+                    On the school side, I tried to work on some really hard coding projects that actually scared me at first. Instead of just doing the basic homework assignments, I spent a lot of late nights figuring out how to make a fraud detection system using Graph Neural Networks. I also trained a 12-layer AI text model from scratch on Kaggle using a couple of GPUs, and spent weeks learning a language called Rust to move huge amounts of data into a cloud system. There were so many times my code crashed or my computer ran out of memory. I had to just sit there, feel frustrated, and slowly figure out how to fix the bugs and tweak the settings. Getting through those annoying moments taught me not to give up so easily and showed me that I can handle hard technical problems if I just stay patient.
+                </p>
+                <p>
+                    But my biggest growth this year did not even happen alone at my keyboard. It happened when I had to work with other people and pitch my ideas. A huge highlight was winning 2nd prize in the P&G Crest Innovation Challenge. I had to come up with new, on-the-go oral care ideas like Oral Pods and Aligner Mists and pitch them in just five minutes, explaining how they would actually help people. Competing in a cybersecurity contest called Capture Ohio '26 with my teammates was also a big turning point. We had to talk and solve problems together under a lot of time pressure, and our team got 21st place out of 68 teams. These successes gave me the confidence to apply for club officer roles. Next year, I am going to be the Treasurer for ACM and the Director of Sponsorship for the CubeCats satellite project. Taking on these roles is pretty scary since I have always been on the shy side, but I know it's exactly what I need to do to become better at public speaking and leading teams.
+                </p>
+                <p>
+                    Even outside of computers, taking the honors trip to Savannah, Georgia, with UC International and the iPALS program in March was an amazing experience. Traveling with a group of students from all different backgrounds helped me learn how to listen to different points of view. It reminded me that the programs I want to build in the future are ultimately meant to help real people, not just run on machines.
+                </p>
+                <p>
+                    Looking forward, my main goal for next year is to find a good software or AI/ML co-op job for the fall where I can use all this hands on practice. I also want to focus on doing a great job managing the money for ACM and finding companies to help fund the CubeCats project. I am really thankful for my friends, teammates, and parents who helped me stay on track this year, and I am excited to keep building my confidence in 2027.
+                </p>
             </div>
         </section>
 
         <!-- Quote Block -->
         <div class="quote-block dark:text-gray-300">
-            "The most powerful quote or lesson from 2026 goes here. Make it meaningful and reflective of your journey."
+            "Coding is not just about talking to machines. It's about stepping away from the screen, learning from the people around you, and building things that actually matter in the real world."
         </div>
-
-        <!-- Photo Gallery Section -->
-        <section class="my-20">
-            <h3 class="text-4xl font-bold text-center mb-12 text-accent dark:text-ocean">Moments Worth Remembering</h3>
-            
-            <div class="photo-grid">
-                <!-- Photo 1 -->
-                <div class="photo-card">
-                    <div class="photo-placeholder">
-                        📸
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-800">
-                        <p class="text-center font-semibold">Photo Caption 1</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 2 -->
-                <div class="photo-card">
-                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        📸
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-800">
-                        <p class="text-center font-semibold">Photo Caption 2</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 3 -->
-                <div class="photo-card">
-                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        📸
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-800">
-                        <p class="text-center font-semibold">Photo Caption 3</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 4 -->
-                <div class="photo-card">
-                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        📸
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-800">
-                        <p class="text-center font-semibold">Photo Caption 4</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 5 -->
-                <div class="photo-card">
-                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                        📸
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-800">
-                        <p class="text-center font-semibold">Photo Caption 5</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 6 -->
-                <div class="photo-card">
-                    <div class="photo-placeholder" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                        📸
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-800">
-                        <p class="text-center font-semibold">Photo Caption 6</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">Month 2026</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Key Highlights -->
         <section class="my-20">
             <h3 class="text-4xl font-bold text-center mb-12 text-accent dark:text-ocean">The Highlights Reel</h3>
-            
+
             <div class="space-y-6">
                 <div class="highlight-box">
                     <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">🎯 Biggest Achievement</h4>
                     <p class="text-lg text-gray-700 dark:text-gray-300">
-                        My Biggest achievement is ...
+                        Building a fraud detection system and training a 12-layer AI text model from scratch on Kaggle using a multi-GPU setup.
                     </p>
                 </div>
-                
+
                 <div class="highlight-box">
                     <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">💡 Most Important Lesson</h4>
                     <p class="text-lg text-gray-700 dark:text-gray-300">
-                        The most important lesson is ...
+                        Coding is not everything. Getting through tough bugs and working with a team during the Capture Ohio contest taught me that patience and talking clearly with others are what actually matter.
                     </p>
                 </div>
-                
+
                 <div class="highlight-box">
                     <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">🌟 Favorite Memory</h4>
                     <p class="text-lg text-gray-700 dark:text-gray-300">
-                        My favourite memory is ...
+                        The spring break trip to Savannah, Georgia, with UC International and iPALS. It was a lot of fun making new friends from different backgrounds and taking a break from computers.
                     </p>
                 </div>
-                
+
                 <div class="highlight-box">
                     <h4 class="text-2xl font-bold mb-3 text-accent dark:text-ocean">🚀 Looking Ahead</h4>
                     <p class="text-lg text-gray-700 dark:text-gray-300">
-                        In 2027, I will ...
+                        Taking on my new roles as ACM Treasurer and CubeCats Sponsorship Director, while looking for a software or AI/ML co-op job for the Fall.
                     </p>
                 </div>
             </div>
@@ -286,7 +224,7 @@
         <section class="my-20">
             <div class="section-divider"></div>
             <div class="reflection-text text-gray-700 dark:text-gray-300 mt-12">
-                
+
                 <p class="text-center text-2xl font-bold mt-12 bg-gradient-to-r from-accent to-ocean bg-clip-text text-transparent">
                     Here's to 2026 - a year I'll never forget. 🥂
                 </p>
@@ -298,20 +236,20 @@
             <h3 class="text-4xl font-bold text-center mb-12 text-accent dark:text-ocean">2026 By The Numbers</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">5+</div>
                     <div class="text-lg text-gray-600 dark:text-gray-400">Projects Completed</div>
                 </div>
                 <div>
-                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
-                    <div class="text-lg text-gray-600 dark:text-gray-400">Countries Visited</div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">21st</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">CTF Contest Rank</div>
                 </div>
                 <div>
-                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
-                    <div class="text-lg text-gray-600 dark:text-gray-400">Books Read</div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">2</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">Club Officer Roles</div>
                 </div>
                 <div>
-                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">--</div>
-                    <div class="text-lg text-gray-600 dark:text-gray-400">New Friends Made</div>
+                    <div class="text-5xl font-extrabold text-accent dark:text-ocean mb-2">50+</div>
+                    <div class="text-lg text-gray-600 dark:text-gray-400">Driving Practice Hours</div>
                 </div>
             </div>
         </section>
@@ -361,7 +299,7 @@
         window.onload = function() {
             const storedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
+
             if (storedTheme) {
                 applyTheme(storedTheme);
             } else if (prefersDark) {
